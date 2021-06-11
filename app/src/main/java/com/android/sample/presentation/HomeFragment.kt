@@ -59,10 +59,25 @@ class HomeFragment : Fragment() {
 
     private fun setUpViews() {
         detailsBTN.isVisible = screenPosition == TAB_ONE
+        tableKeyAndLogin.isVisible = screenPosition == TAB_ONE
         eventsRV.isVisible = screenPosition != TAB_ONE
 
         detailsBTN.setOnClickListener {
             startActivity(Intent(requireContext(), DetailsActivity::class.java))
+        }
+
+        button_login_email.setOnClickListener {
+            Ometria.instance()
+                .trackProfileIdentifiedByEmailEvent(input_login_email.text.toString())
+            Ometria.instance()
+                .flush()
+        }
+
+        button_login_customer_id.setOnClickListener {
+            Ometria.instance()
+                .trackProfileIdentifiedByCustomerIdEvent(input_login_customer_id.text.toString())
+            Ometria.instance()
+                .flush()
         }
     }
 
